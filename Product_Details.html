@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+    #end{
+    position:absolute;
+    bottom:15%;
+    left:46%;
+    }
+    </style>
+</head>
+<body>
+  <button id="end" type="button" onclick="window.location.href='Home_cont.html'">GO to homepage</button>
+  <div id="two">   </div>
+
+   <script>
+    var getdata=localStorage.getItem('saving');
+    
+  var save= JSON.parse(getdata);
+    document.getElementById("two").innerHTML+='<div> <img  src="'+save.images+'"  > </div>\
+ <div> '+save.name+'  </div>   <div> '+save.description+'  </div> <div> price='+save.price+'  </div>';
+    
+ 
+  </script>
+</body>
+
+</html>

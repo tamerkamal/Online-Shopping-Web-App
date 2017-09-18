@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+     <style>
+    #end{
+    position:absolute;
+    bottom:15%;
+    left:46%;
+    }
+      #p{
+    position:absolute;
+    bottom:32%;
+    left:47%;
+    }
+    </style>
+</head>
+<body>
+  
+<div id="three"></div>
+   <div id="p"> Total Price =  </div>
+  <div id="end"> <button  type="button" onclick="window.location.href='Thank_You.html'">Purchase Now</button> </div>
+  <script>
+  
+  
+var getdata1=localStorage.getItem('selected');
+
+     console.log(getdata1);
+
+  var save1= JSON.parse(getdata1);
+  
+  var Total=0;
+ for(i=0;i<save1.length;i++)
+  {  document.getElementById("three").innerHTML+='\
+   <span>  name= '+save1[i].name+' </span> \
+     <span>  price= '+save1[i].price+' </span>\
+    <span>  quantity= '+save1[i].quantity+' </span>\
+  <span>  total price= '+save1[i].totalprice+' </span> <br> ' 
+ // document.getElementById("p").innerHTML+='<div>'+save1[i].Totalprice+'</div>'
+ Total+=save1[i].totalprice;
+  }
+  
+ document.getElementById("p").innerHTML='<div> Total price= '+Total+' </div>'
+
+   // document.getElementById("p").innerHTML+='<div>'+save1.Totalprice+'</div>'
+          
+ 
+  
+ 
+    
+  </script>
+</body>
+</html>

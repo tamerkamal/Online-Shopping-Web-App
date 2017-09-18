@@ -1,0 +1,95 @@
+<!doctype html>
+<html>
+<head>
+<style>
+center{
+  text-decoration: underline;
+}
+#end{
+    position:absolute;
+    bottom:0%;
+    left : 47%;
+    }
+
+ </style>
+</head>
+<body>
+   <div id="h">  <center>  Home </center>  </div>
+     <div id="one"></div>
+ <footer>   <button id="end" type="button"
+  onclick="save()">Order Now</button>  </footer> 
+   
+ <script>
+//var quantity;
+ var data;
+ var request=new XMLHttpRequest();
+ request.open("GET","http://test.w34.co/json/");
+ request.onreadystatechange=function(){
+ if (this.readyState==4 && this.status==200){
+ console.log(JSON.parse(this.response))
+ data=JSON.parse(this.response);
+ for(var i=0,length=data.length;i<length;i++){
+     data[i].quantity=0;
+document.getElementById("one").innerHTML+='\
+    <div  id="elem-'+i+'" style="width:200px;float:left;">\
+    <img  src="'+data[i].images+'" onclick="saving('+i+')" >\
+ <div><b style="float:left" >'+data[i].name+'</b><b style="float:right padding:10%">'+data[i].price+'</b></div><br>\
+ <div><button type="button" id="minus-'+i+'" onclick="minus('+i+')"> - </button>\
+<input type="text" id="num'+i+'" value="0" style="width:10px">\
+ <button type="button" id="plus-'+i+'" onclick="plus('+i+')"> + </button> </div>\
+</div>';
+ }
+ }
+ }
+ request.send();
+
+ function minus(i){
+ var Num= document.getElementById("num"+i).value;
+ if(Num>0){
+   
+  Num-- ; 
+   data[i].quantity=Num; 
+  }
+  else {
+   Num=0;   
+  }
+  document.getElementById("num"+i).value=Num;
+  }
+ function plus(i){
+    
+  var Num= document.getElementById("num"+i).value;
+  
+  Num++; 
+  data[i].quantity=Num;
+  document.getElementById("num"+i).value=Num;
+   
+  }
+ 
+
+  function save(){
+	var Num;
+   var Totalprice;
+	var arrobj=[];
+	 for (var i=0,length=data.length;i<length;i++)
+		{
+			var Num= document.getElementById("num"+i).value;
+			if(Num>0)
+			{
+	
+				data[i].totalprice=Num*data[i].price;
+       
+				arrobj.push(data[i]);
+			}
+		}
+	localStorage.setItem("selected", JSON.stringify(arrobj));
+	window.location.href = "Order_Page.html";
+  	
+}
+
+function saving(i){
+  localStorage.setItem('saving',JSON.stringify(data[i]));
+  location.replace('product_Details.html');
+}
+ </script>
+ </body>
+</html>
